@@ -2,7 +2,7 @@
   <div class="landing-page">
     <!-- Header -->
     <header class="header">
-      <div class="container">
+      <div class="header-container">
         <div class="logo">
           <a href="#home">
             <img :src="logoImg" alt="UMBRELLA" class="logo-img" />
@@ -18,47 +18,72 @@
     </header>
 
     <!-- Hero Section -->
-    <section id="hero" class="hero-section">
-      <div class="hero-background">
-        <div class="stars"></div>
-      </div>
-      <div class="container">
-        <div class="hero-content">
-          <div class="hero-visual">
-            <img
-              :src="handPhoneImg"
-              alt="Mão segurando celular"
-              class="hand-illustration"
-            />
+    <section
+      id="hero"
+      class="relative bg-[#0A1931] min-h-screen flex flex-col justify-center items-center overflow-hidden px-6 md:px-12"
+    >
+      <div
+        class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-10 md:gap-16"
+      >
+        <!-- Imagem -->
+        <div class="flex justify-center items-center w-full md:w-1/2">
+          <div class="relative">
+            <div
+              class="w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-2xl"
+            >
+              <img
+                :src="handPhoneImg"
+                alt="Mão segurando celular"
+                class="w-56 sm:w-64 md:w-80 drop-shadow-[0_10px_25px_rgba(0,0,0,0.3)]"
+              />
+            </div>
           </div>
-          <div class="hero-text">
-            <h1 class="hero-title">Quando o céu muda, o Umbrella avisa</h1>
-            <h2 class="hero-brand">UMBRELLA</h2>
-            <button class="hero-button">
-              <span class="play-icon">▶</span>
-              Conheça
-            </button>
-          </div>
+        </div>
+
+        <!-- Textos -->
+        <div
+          class="flex flex-col justify-center items-center md:items-start text-center md:text-left w-full md:w-1/2"
+        >
+          <h1
+            class="text-white text-xl sm:text-2xl md:text-3xl font-medium mb-2 leading-snug"
+          >
+            Quando o céu muda, o Umbrella avisa
+          </h1>
+
+          <h2
+            class="text-white text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-wide mb-6"
+          >
+            UMBRELLA
+          </h2>
+
+          <button
+            class="flex items-center gap-2 bg-white text-[#0A1931] font-semibold rounded-full px-6 py-3 text-base sm:text-lg hover:scale-105 hover:shadow-lg transition-all"
+          >
+            <span
+              class="flex justify-center items-center w-6 h-6 rounded-full border border-[#0A1931] text-sm"
+            >
+              ▶
+            </span>
+            Conheça
+          </button>
         </div>
       </div>
     </section>
 
     <!-- NASA Data Section -->
-    <section id="dados" class="nasa-section">
+    <section id="dados" class="section-white nasa-section">
       <div class="container">
-        <h2 class="nasa-title">Feito com dados reais da NASA.</h2>
+        <h2 class="nasa-title font-londrina-solid">
+          Feito com dados reais da NASA.
+        </h2>
         <div class="chart-container">
-          <img
-            :src="nasaChartImg"
-            alt="Gráfico de dados da NASA"
-            class="nasa-chart"
-          />
+          <PrecipitationChart />
         </div>
       </div>
     </section>
 
     <!-- How It Works Section -->
-    <section id="demo" class="how-it-works-section">
+    <section id="demo" class="section-white how-it-works-section">
       <div class="container">
         <div class="how-it-works-content">
           <div class="space-illustration">
@@ -69,8 +94,10 @@
             />
           </div>
           <div class="how-it-works-text">
-            <h2 class="how-it-works-title">Como Funciona</h2>
-            <p class="how-it-works-subtitle">
+            <h2 class="how-it-works-title font-londrina-solid">
+              Como Funciona
+            </h2>
+            <p class="how-it-works-subtitle font-poppins">
               De dados espaciais a decisões terrestres.
             </p>
 
@@ -104,26 +131,22 @@
     </section>
 
     <!-- App Screens Section -->
-    <section class="app-screens-section">
+    <section class="section-blue app-screens-section">
       <div class="container">
-        <h2 class="app-screens-title">Telas do app</h2>
-        <div class="screens-carousel">
-          <div
-            v-for="(screen, index) in appScreens"
-            :key="index"
-            class="screen-item"
-          >
-            <img :src="screen.image" :alt="screen.alt" class="screen-image" />
-          </div>
-        </div>
+        <h2
+          class="app-screens-title font-londrina-solid text-white text-center text-3xl sm:text-4xl font-bold mb-8"
+        >
+          Demonstração Interativa
+        </h2>
+        <AppCarousel />
       </div>
     </section>
 
     <!-- Team Section -->
-    <section id="equipe" class="team-section">
+    <section id="equipe" class="section-white team-section">
       <div class="container">
-        <h2 class="team-title">Sobre a Equipe</h2>
-        <div class="team-description">
+        <h2 class="team-title font-londrina-solid">Sobre a Equipe</h2>
+        <div class="team-description font-poppins">
           <p>
             Um time apaixonado por dados, design e tecnologia, transformando
             ciência espacial em utilidade humana
@@ -137,11 +160,15 @@
             class="member-card"
           >
             <div class="member-photo">
-              <img :src="member.photo" :alt="member.name" class="photo-img" />
+              <img
+                :src="member.photo"
+                :alt="member.name"
+                class="photo-img font-londrina-solid"
+              />
             </div>
             <div class="member-info">
-              <h3 class="member-name">{{ member.name }}</h3>
-              <p class="member-role">
+              <h3 class="member-name font-poppins">{{ member.name }}</h3>
+              <p class="member-role font-poppins">
                 {{ member.education }} - {{ member.profession }}
               </p>
             </div>
@@ -151,17 +178,21 @@
     </section>
 
     <!-- Footer Section -->
-    <section class="footer-section">
-      <div class="footer-background">
-        <div class="stars"></div>
-      </div>
+    <section class="section-blue footer-section">
       <div class="container">
         <div class="footer-content">
           <div class="footer-text">
-            <h2 class="footer-title">
+            <h2 class="footer-title font-londrina-solid">
               Prepare-se para o futuro com o Umbrella
             </h2>
-            <button class="github-button">Ver no Github</button>
+            <a
+              href="https://www.figma.com/proto/nncnhElr6XlpVGbFZBnF3o/Nazarentos?node-id=21-169&t=nOwrrSM0o2RTmk60-0&scaling=scale-down&content-scaling=fixed&page-id=1%3A3&starting-point-node-id=21%3A234&show-proto-sidebar=1"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="github-button font-poppins inline-block"
+            >
+              Acesse Agora
+            </a>
           </div>
           <div class="footer-visual">
             <img
@@ -173,19 +204,42 @@
         </div>
       </div>
     </section>
+
+    <!-- Copyright Footer -->
+    <footer class="copyright-footer">
+      <div class="container">
+        <div class="copyright-content">
+          <p class="copyright-text font-poppins">
+            © 2025 UMBRELLA — Powered by NASA Earth Science Data.
+          </p>
+          <p class="copyright-text font-poppins">
+            Desenvolvido com ❤️ pela equipe Nazarentos durante o NASA Space Apps
+            Challenge 2025.
+          </p>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script setup lang="ts">
+  import AppCarousel from '@/components/AppCarousel.vue';
+  import PrecipitationChart from '@/components/PrecipitationChart.vue';
   import { useGSAPAnimations } from '@/composables/useGSAPAnimations';
   import { onMounted, ref } from 'vue';
 
   // Importar imagens
   import logoImg from '@/assets/images/Logo.svg';
   import handPhoneImg from '@/assets/images/hand-phone.svg';
-  import nasaChartImg from '@/assets/images/nasa-chart.svg';
   import planetSpaceImg from '@/assets/images/planet-space.svg';
   import rocketSpaceImg from '@/assets/images/rocket-space.svg';
+
+  // Importar fotos da equipe
+  import team1Img from '@/assets/images/team/team1.jpg';
+  import team2Img from '@/assets/images/team/team2.jpg';
+  import team3Img from '@/assets/images/team/team3.jpg';
+  import team4Img from '@/assets/images/team/team4.png';
+  import team5Img from '@/assets/images/team/team5.png';
 
   // Dados do slider "Como Funciona"
   const currentStep = ref(0);
@@ -224,34 +278,34 @@
   // Dados da equipe
   const teamMembers = ref([
     {
-      name: 'Ana Silva',
-      education: 'Ciência da Computação',
-      profession: 'Desenvolvedora Full Stack',
-      photo: '@/assets/images/team1.jpg',
-    },
-    {
-      name: 'Carlos Santos',
-      education: 'Engenharia de Dados',
-      profession: 'Cientista de Dados',
-      photo: '@/assets/images/team2.jpg',
-    },
-    {
-      name: 'Maria Oliveira',
-      education: 'Design Gráfico',
-      profession: 'UI/UX Designer',
-      photo: '@/assets/images/team3.jpg',
-    },
-    {
-      name: 'João Costa',
-      education: 'Meteorologia',
-      profession: 'Especialista em Clima',
-      photo: '@/assets/images/team4.jpg',
-    },
-    {
-      name: 'Lucas Ferreira',
+      name: 'Karoline Novais Rezende',
       education: 'Engenharia de Software',
-      profession: 'Arquiteto de Software',
-      photo: '@/assets/images/team5.jpg',
+      profession: 'Desenvolvedora Full-Stack',
+      photo: team1Img,
+    },
+    {
+      name: 'Mateus Freire',
+      education: 'Engenharia de Software',
+      profession: 'Desenvolvedor Full-Stack',
+      photo: team2Img,
+    },
+    {
+      name: 'Dara Lemons',
+      education: 'Design de Interfaces e Experiência do Usuário',
+      profession: 'UX/UI Designer & QA Engineer',
+      photo: team3Img,
+    },
+    {
+      name: 'Patricia Neto',
+      education: 'Engenharia de Software',
+      profession: 'Quality Assurance Specialist',
+      photo: team4Img,
+    },
+    {
+      name: 'Vinicius Marini Lopez',
+      education: 'Ciência da Computação',
+      profession: 'Desenvolvedor Full-Stack',
+      photo: team5Img,
     },
   ]);
 
@@ -297,96 +351,95 @@
 
 <style scoped>
   /* Reset e configurações básicas */
+  :root {
+    --dark-blue: #0a1931;
+    --light-blue: #e0f2f7;
+    --green: #69f0ae;
+    --orange: #ff8a65;
+    --white: #ffffff;
+    --gray: #282c34;
+  }
+
   * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
   }
-
-  .header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    opacity: 0.3;
-    pointer-events: none;
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--surface);
+    font-family:
+      ui-sans-serif,
+      'Inter',
+      system-ui,
+      -apple-system,
+      Segoe UI,
+      Roboto,
+      Arial,
+      sans-serif;
   }
 
-  .header .container {
+  /* ===== Header ===== */
+  .header {
+    position: relative;
+    padding: 0.5rem 0;
+  }
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0.1rem 2rem;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
   }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
   .logo-img {
-    width: 40px;
-    height: 40px;
-  }
-
-  .logo-text {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--white);
+    height: 28px;
+    display: block;
   }
 
   .nav {
     display: flex;
-    gap: 2rem;
+    gap: 28px;
   }
-
   .nav-link {
+    font-weight: 700;
     text-decoration: none;
     color: var(--white);
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-
-  .nav-link:hover {
-    color: var(--green);
-  }
-
-  /* Hero Section */
-  .hero-section {
-    min-height: 100vh;
+    padding: 8px 0;
     position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background: currentColor;
+    transform: scaleX(0);
+    transition: 0.2s;
+    transform-origin: left;
+  }
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* ===== Hero ===== */
+  .hero-section {
+    position: relative;
+    min-height: 92vh;
     display: flex;
     align-items: center;
-    padding-top: 80px;
-    overflow: hidden;
-    color: var(--white);
-  }
-
-  .hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     overflow: hidden;
   }
 
-  .stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
-    background-image:
-      radial-gradient(2px 2px at 20px 30px, var(--white), transparent),
-      radial-gradient(2px 2px at 40px 70px, var(--white), transparent),
-      radial-gradient(1px 1px at 90px 40px, var(--white), transparent),
-      radial-gradient(1px 1px at 130px 80px, var(--white), transparent);
-    background-repeat: repeat;
-    background-size: 200px 100px;
-    opacity: 0.8;
+  /* conteúdo por cima */
+  .hero-section .container {
+    position: relative;
+    z-index: 2;
   }
 
   .hero-content {
@@ -394,103 +447,122 @@
     align-items: center;
     gap: 4rem;
     width: 100%;
-    position: relative;
-    z-index: 2;
   }
 
+  /* Conteúdo textual */
+  .hero-text {
+    flex: 1;
+    max-width: 560px;
+  }
+  .hero-title {
+    margin: 0 0 16px 0;
+    font-size: clamp(22px, 2.6vw, 32px);
+    line-height: 1.25;
+    color: var(--white);
+    font-weight: 800;
+  }
+  .hero-brand {
+    margin: 6px 0 22px 0;
+    font-size: clamp(54px, 8.2vw, 96px);
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  /* Botão "Conheça" com ícone de play */
+  .hero-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px 12px 14px;
+    border-radius: 999px;
+    background: var(--white);
+    border: 2px solid var(--white);
+    color: var(--dark-blue);
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    transition:
+      transform 0.12s ease,
+      box-shadow 0.12s ease;
+  }
+  .hero-button .play-icon {
+    display: inline-grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--dark-blue);
+    font-size: 12px;
+    line-height: 0;
+    translate: 0 0.5px;
+  }
+  .hero-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+  }
+
+  /* Ilustração com halo */
   .hero-visual {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 60vh;
-  }
-
-  .hand-illustration {
-    max-width: 400px;
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-  }
-
-  .hero-text {
-    flex: 1;
-    color: var(--dark-blue);
-    background: var(--light-blue);
-    padding: 3rem;
-    border-radius: 20px;
-    margin-left: 2rem;
-    position: relative;
-    z-index: 3;
-  }
-
-  .hero-title {
-    font-size: 2.5rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-    color: var(--dark-blue);
-  }
-
-  .hero-brand {
-    font-size: 4rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    letter-spacing: 0.1em;
-    color: var(--dark-blue);
-  }
-
-  .hero-button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: transparent;
-    color: var(--dark-blue);
-    border: 2px solid var(--dark-blue);
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .hero-button:hover {
-    background: var(--dark-blue);
-    color: var(--white);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(10, 25, 49, 0.3);
-  }
-
-  .play-icon {
-    width: 20px;
-    height: 20px;
-    background: var(--dark-blue);
+    width: min(360px, 36vw);
+    aspect-ratio: 1/1;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    color: var(--white);
+    /* halo/spot */
+    box-shadow:
+      0 0 0 0 rgba(67, 99, 214, 0),
+      0 0 120px 40px rgba(54, 79, 198, 0.38) inset,
+      0 0 160px 22px rgba(20, 42, 110, 0.45);
+    background: radial-gradient(
+      60% 60% at 50% 45%,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0) 60%
+    );
+  }
+  .hand-illustration {
+    width: 86%;
+    filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.28));
   }
 
-  .hero-button:hover .play-icon {
-    background: var(--white);
-    color: var(--dark-blue);
+  /* ===== Responsivo ===== */
+  @media (max-width: 992px) {
+    .hero-content {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .hero-visual {
+      width: min(320px, 44vw);
+    }
   }
-
-  /* NASA Section */
-  .nasa-section {
-    background: var(--light-blue)
-      linear-gradient(180deg, #e0f2f7 0%, #d1e8ec 100%);
-    color: var(--dark-blue);
-    padding: 4rem 0;
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
+  @media (max-width: 640px) {
+    .header-container {
+      padding: 16px 16px;
+    }
+    .nav {
+      gap: 18px;
+    }
+    .hero-section {
+      min-height: 86vh;
+    }
+    .hero-content {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .hero-visual {
+      width: min(300px, 74vw);
+      opacity: 0.96;
+    }
+    .hero-title {
+      font-size: 18px;
+    }
+    .hero-brand {
+      font-size: clamp(44px, 16vw, 72px);
+    }
   }
-
   .nasa-title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -508,17 +580,6 @@
     max-width: 800px;
     width: 100%;
     height: auto;
-  }
-
-  /* How It Works Section */
-  .how-it-works-section {
-    background: var(--light-blue)
-      linear-gradient(180deg, #e0f2f7 0%, #d1e8ec 100%);
-    padding: 4rem 0;
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
   }
 
   .how-it-works-content {
@@ -612,15 +673,6 @@
   }
 
   /* App Screens Section */
-  .app-screens-section {
-    background: var(--dark-blue)
-      linear-gradient(180deg, #0a1931 0%, #10264a 100%);
-    color: var(--white);
-    padding: 4rem 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
 
   .app-screens-title {
     font-size: 2.5rem;
@@ -653,15 +705,6 @@
   }
 
   /* Team Section */
-  .team-section {
-    background: var(--light-blue)
-      linear-gradient(180deg, #e0f2f7 0%, #d1e8ec 100%);
-    color: var(--dark-blue);
-    padding: 4rem 0;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
 
   .team-title {
     font-size: 2.5rem;
@@ -729,29 +772,6 @@
   }
 
   /* Footer Section */
-  .footer-section {
-    background: var(--dark-blue)
-      linear-gradient(180deg, #0a1931 0%, #10264a 100%);
-    padding: 4rem 0;
-    position: relative;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-
-  .footer-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-  }
-
-  .footer-background .stars {
-    height: 100%;
-    opacity: 0.6;
-  }
 
   .footer-content {
     display: flex;
@@ -800,75 +820,6 @@
     max-width: 300px;
     width: 100%;
     height: auto;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .nav {
-      gap: 1rem;
-    }
-
-    .nav-link {
-      font-size: 0.9rem;
-    }
-
-    .hero-content {
-      flex-direction: column;
-      text-align: center;
-      gap: 2rem;
-    }
-
-    .hero-text {
-      background: var(--white);
-      margin-left: 0;
-      margin-top: 2rem;
-      padding: 2rem;
-    }
-
-    .hero-visual {
-      min-height: 40vh;
-    }
-
-    .hand-illustration {
-      max-width: 300px;
-    }
-
-    .hero-title {
-      font-size: 2rem;
-    }
-
-    .hero-brand {
-      font-size: 3rem;
-    }
-
-    .how-it-works-content {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .footer-content {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .screens-carousel {
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .screen-item {
-      flex: none;
-      max-width: 250px;
-    }
-
-    .team-members {
-      gap: 1rem;
-    }
-
-    .member-card {
-      flex-direction: column;
-      text-align: center;
-    }
   }
 
   @media (max-width: 480px) {
