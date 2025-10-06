@@ -250,7 +250,7 @@
             © 2025 UMBRELLA — Powered by NASA Earth Science Data.
           </p>
           <p class="copyright-text font-poppins">
-            Desenvolvido com ❤️ pela equipe Nazarentos durante o NASA Space Apps
+            Desenvolvido com ❤️ pela equipe Nasarentos durante o NASA Space Apps
             Challenge 2025.
           </p>
         </div>
@@ -282,7 +282,7 @@
           <div class="relative w-full" style="padding-bottom: 56.25%">
             <iframe
               class="absolute top-0 left-0 w-full h-full rounded"
-              src="https://youtu.be/7CU4sW2yhz4"
+              src="https://youtu.be/gmaG1DUavog?si=84fT_JZ4hbo2J6pi"
               title="Demonstração do UMBRELLA"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

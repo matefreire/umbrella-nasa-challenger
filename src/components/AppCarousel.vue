@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative w-full overflow-hidden py-8 sm:py-12"
+    class="relative w-full overflow-hidden py-8 sm:py-12 min-h-[400px] md:min-h-[500px] px-4"
     @mouseenter="pauseCarousel"
     @mouseleave="resumeCarousel"
   >
@@ -27,7 +27,7 @@
         <div
           v-for="(image, index) in [...images, ...images]"
           :key="`${index}-${Math.floor(index / images.length)}`"
-          class="flex-shrink-0 px-2 flex justify-center items-center"
+          class="flex-shrink-0 px-2 flex justify-center items-center h-full"
           :class="{
             'w-1/2 md:w-1/4': true,
           }"
@@ -35,7 +35,7 @@
           <img
             :src="image"
             :alt="`App Screenshot ${(index % images.length) + 1}`"
-            class="rounded-lg shadow-lg bg-gray-200 w-[95%] md:w-[95%] transition-transform duration-500 hover:scale-125 hover:shadow-2xl"
+            class="rounded-lg shadow-lg bg-gray-200 w-[85%] md:w-[85%] h-auto object-contain transition-transform duration-500 hover:scale-125 hover:shadow-2xl"
           />
         </div>
       </div>
