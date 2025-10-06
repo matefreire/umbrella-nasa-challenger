@@ -93,10 +93,12 @@
               class="planet-graphic"
             />
           </div>
+
           <div class="how-it-works-text">
             <h2 class="how-it-works-title font-londrina-solid">
               Como Funciona
             </h2>
+
             <p class="how-it-works-subtitle font-poppins">
               De dados espaciais a decisões terrestres.
             </p>
@@ -124,6 +126,34 @@
                   @click="currentStep = index"
                 ></button>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Como Usar o App Section -->
+    <section class="section-white app-usage-section">
+      <div class="container">
+        <h2 class="app-usage-title font-londrina-solid">Como Usar o App</h2>
+        <p class="app-usage-subtitle font-poppins">
+          Simples e intuitivo, em apenas 4 passos você está pronto para usar.
+        </p>
+
+        <div class="app-usage-cards">
+          <div
+            v-for="(card, index) in howItWorksCards"
+            :key="index"
+            class="usage-card"
+          >
+            <div class="card-content">
+              <h3 class="card-title font-londrina-solid">{{ card.title }}</h3>
+              <p class="card-description font-poppins">
+                {{ card.description }}
+              </p>
+            </div>
+            <div class="card-image">
+              <img :src="card.image" :alt="card.title" class="card-img" />
             </div>
           </div>
         </div>
@@ -241,6 +271,12 @@
   import team4Img from '@/assets/images/team/team4.png';
   import team5Img from '@/assets/images/team/team5.png';
 
+  // Importar imagens do app
+  import app12Img from '@/assets/images/app/app12.png';
+  import app13Img from '@/assets/images/app/app13.png';
+  import app8Img from '@/assets/images/app/app8.png';
+  import app9Img from '@/assets/images/app/app9.png';
+
   // Dados do slider "Como Funciona"
   const currentStep = ref(0);
   const steps = ref([
@@ -273,6 +309,30 @@
     { image: '@/assets/images/screen3.png', alt: 'Tela de alertas' },
     { image: '@/assets/images/screen4.png', alt: 'Tela de configurações' },
     { image: '@/assets/images/screen5.png', alt: 'Tela de histórico' },
+  ]);
+
+  // Dados dos cards "Como Funciona"
+  const howItWorksCards = ref([
+    {
+      title: 'Selecione um local',
+      description: 'Pesquise ou clique no mapa.',
+      image: app8Img,
+    },
+    {
+      title: 'Escolha uma data',
+      description: 'O dia do evento, viagem ou trilha.',
+      image: app9Img,
+    },
+    {
+      title: 'Veja as probabilidades',
+      description: 'Calor, frio, chuva ou vento.',
+      image: app12Img,
+    },
+    {
+      title: 'Tenha insights visuais',
+      description: 'Gráficos, curvas de probabilidade e mapas interativos.',
+      image: app13Img,
+    },
   ]);
 
   // Dados da equipe
@@ -670,6 +730,136 @@
   .indicator.active {
     background: var(--green);
     transform: scale(1.2);
+  }
+
+  /* Como Usar o App Section */
+  .app-usage-section {
+    padding: 4rem 0;
+  }
+
+  .app-usage-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--dark-blue);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .app-usage-subtitle {
+    font-size: 1.2rem;
+    color: var(--dark-blue);
+    text-align: center;
+    margin-bottom: 3rem;
+    opacity: 0.8;
+  }
+
+  .app-usage-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .usage-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .usage-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-content {
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-blue);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .card-description {
+    font-size: 1rem;
+    color: var(--dark-blue);
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+
+  .card-image {
+    flex-shrink: 0;
+  }
+
+  .card-img {
+    width: 100%;
+    max-width: 180px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Responsividade para os cards */
+  @media (max-width: 768px) {
+    .app-usage-cards {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 0 1rem;
+    }
+  }
+
+  @media (max-width: 1024px) and (min-width: 769px) {
+    .app-usage-cards {
+      max-width: 800px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .card-img {
+      max-width: 150px;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+    }
+
+    .card-description {
+      font-size: 0.9rem;
+    }
+
+    .app-usage-title {
+      font-size: 2rem;
+    }
+
+    .app-usage-subtitle {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .app-usage-section {
+      padding: 3rem 0;
+    }
+
+    .usage-card {
+      padding: 1.25rem;
+    }
+
+    .card-img {
+      max-width: 120px;
+    }
   }
 
   /* App Screens Section */
