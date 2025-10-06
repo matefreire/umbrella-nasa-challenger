@@ -282,7 +282,7 @@
           <div class="relative w-full" style="padding-bottom: 56.25%">
             <iframe
               class="absolute top-0 left-0 w-full h-full rounded"
-              src="https://www.youtube.com/embed/OtB2x0REyzM"
+              src="https://youtu.be/7CU4sW2yhz4"
               title="Demonstração do UMBRELLA"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
