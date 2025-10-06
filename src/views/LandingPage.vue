@@ -45,18 +45,19 @@
           class="flex flex-col justify-center items-center md:items-start text-center md:text-left w-full md:w-1/2"
         >
           <h1
-            class="text-white text-xl sm:text-2xl md:text-3xl font-medium mb-2 leading-snug"
+            class="text-white text-xl sm:text-2xl md:text-3xl font-medium mb-2 leading-snug font-londrina-solid"
           >
             Quando o céu muda, o Umbrella avisa
           </h1>
 
           <h2
-            class="text-white text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-wide mb-6"
+            class="text-white text-5xl sm:text-6xl md:text-7xl font-extrabold tracking-wide mb-6 font-londrina-solid"
           >
             UMBRELLA
           </h2>
 
           <button
+            @click="openVideoModal"
             class="flex items-center gap-2 bg-white text-[#0A1931] font-semibold rounded-full px-6 py-3 text-base sm:text-lg hover:scale-105 hover:shadow-lg transition-all"
           >
             <span
@@ -113,8 +114,12 @@
                   :class="{ active: currentStep === index }"
                   v-show="currentStep === index"
                 >
-                  <h3 class="step-title">{{ step.title }}</h3>
-                  <p class="step-description">{{ step.description }}</p>
+                  <h3 class="step-title font-londrina-solid">
+                    {{ step.title }}
+                  </h3>
+                  <p class="step-description font-poppins">
+                    {{ step.description }}
+                  </p>
                 </div>
               </div>
               <div class="slider-indicators">
@@ -177,11 +182,13 @@
       <div class="container">
         <h2 class="team-title font-londrina-solid">Sobre a Equipe</h2>
         <div class="team-description font-poppins">
-          <p>
+          <p class="font-poppins">
             Um time apaixonado por dados, design e tecnologia, transformando
             ciência espacial em utilidade humana
           </p>
-          <p>Criamos o Umbrella no NASA Space Apps Challenge 2025.</p>
+          <p class="font-poppins">
+            Criamos o Umbrella no NASA Space Apps Challenge 2025.
+          </p>
         </div>
         <div class="team-members">
           <div
@@ -197,7 +204,7 @@
               />
             </div>
             <div class="member-info">
-              <h3 class="member-name font-poppins">{{ member.name }}</h3>
+              <h3 class="member-name font-londrina-solid">{{ member.name }}</h3>
               <p class="member-role font-poppins">
                 {{ member.education }} - {{ member.profession }}
               </p>
@@ -249,6 +256,42 @@
         </div>
       </div>
     </footer>
+
+    <!-- Modal de Vídeo -->
+    <div
+      v-if="showVideoModal"
+      class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+      @click="closeVideoModal"
+    >
+      <div
+        class="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+        @click.stop
+      >
+        <!-- Header do Modal -->
+        <div class="flex justify-between items-center p-4 border-b">
+          <button
+            @click="closeVideoModal"
+            class="text-gray-500 hover:text-gray-700 text-2xl font-bold leading-none"
+          >
+            ×
+          </button>
+        </div>
+
+        <!-- Conteúdo do Vídeo -->
+        <div class="p-4">
+          <div class="relative w-full" style="padding-bottom: 56.25%">
+            <iframe
+              class="absolute top-0 left-0 w-full h-full rounded"
+              src="https://www.youtube.com/embed/OtB2x0REyzM"
+              title="Demonstração do UMBRELLA"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -279,6 +322,17 @@
 
   // Dados do slider "Como Funciona"
   const currentStep = ref(0);
+  const showVideoModal = ref(false);
+
+  // Funções para controlar o modal de vídeo
+  const openVideoModal = () => {
+    showVideoModal.value = true;
+  };
+
+  const closeVideoModal = () => {
+    showVideoModal.value = false;
+  };
+
   const steps = ref([
     {
       title: 'Coleta de Dados',
@@ -623,6 +677,13 @@
       font-size: clamp(44px, 16vw, 72px);
     }
   }
+  .nasa-section {
+    min-height: auto;
+    padding: 2rem 2rem;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+  }
+
   .nasa-title {
     font-size: 2.5rem;
     font-weight: 700;
@@ -640,6 +701,13 @@
     max-width: 800px;
     width: 100%;
     height: auto;
+  }
+
+  .how-it-works-section {
+    min-height: auto;
+    padding: 2rem 2rem;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
   }
 
   .how-it-works-content {

@@ -5,13 +5,23 @@
     @mouseleave="resumeCarousel"
   >
     <!-- Container do carrossel -->
-    <div class="relative w-full">
+    <div
+      class="relative w-full cursor-grab active:cursor-grabbing"
+      @mousedown="startDrag"
+      @mousemove="onDrag"
+      @mouseup="endDrag"
+      @mouseleave="endDrag"
+      @touchstart="startTouch"
+      @touchmove="onTouch"
+      @touchend="endTouch"
+    >
       <!-- Faixa de imagens -->
       <div
-        class="flex transition-transform duration-700 ease-in-out"
+        class="flex transition-transform duration-700 ease-in-out select-none"
         :style="{
           transform: `translateX(-${currentIndex * (100 / visibleImages)}%)`,
         }"
+        ref="carouselContainer"
       >
         <!-- Duplicar imagens para criar loop infinito -->
         <div
@@ -19,13 +29,13 @@
           :key="`${index}-${Math.floor(index / images.length)}`"
           class="flex-shrink-0 px-2 flex justify-center items-center"
           :class="{
-            'w-1/3 md:w-1/6': true,
+            'w-1/2 md:w-1/4': true,
           }"
         >
           <img
             :src="image"
             :alt="`App Screenshot ${(index % images.length) + 1}`"
-            class="rounded-lg shadow-lg bg-gray-200 w-[85%] md:w-[90%] transition-transform duration-500 hover:scale-105"
+            class="rounded-lg shadow-lg bg-gray-200 w-[95%] md:w-[95%] transition-transform duration-500 hover:scale-125 hover:shadow-2xl"
           />
         </div>
       </div>
@@ -91,8 +101,8 @@
   import app8 from '@/assets/images/app/app8.png';
   import app9 from '@/assets/images/app/app9.png';
 
-  // quantidade de imagens visíveis por vez (3 no mobile, 6 no desktop)
-  const visibleImages = ref(3);
+  // quantidade de imagens visíveis por vez (2 no mobile, 4 no desktop)
+  const visibleImages = ref(2);
 
   // array de imagens
   const images = [
@@ -115,13 +125,88 @@
   const currentIndex = ref(0);
   let interval: ReturnType<typeof setInterval> | null = null;
 
+  // Variáveis para funcionalidade de arrastar
+  const isDragging = ref(false);
+  const startX = ref(0);
+  const currentX = ref(0);
+  const carouselContainer = ref<HTMLElement | null>(null);
+
+  // Variáveis para touch
+  const isTouching = ref(false);
+  const startTouchX = ref(0);
+  const currentTouchX = ref(0);
+
   // Atualizar quantidade de imagens visíveis baseado no tamanho da tela
   const updateVisibleImages = () => {
     if (window.innerWidth >= 768) {
-      visibleImages.value = 6; // desktop
+      visibleImages.value = 4; // desktop
     } else {
-      visibleImages.value = 3; // mobile
+      visibleImages.value = 2; // mobile
     }
+  };
+
+  // Funções para arrastar com mouse
+  const startDrag = (e: MouseEvent) => {
+    isDragging.value = true;
+    startX.value = e.clientX;
+    currentX.value = e.clientX;
+    pauseCarousel();
+  };
+
+  const onDrag = (e: MouseEvent) => {
+    if (!isDragging.value) return;
+    e.preventDefault();
+    currentX.value = e.clientX;
+  };
+
+  const endDrag = () => {
+    if (!isDragging.value) return;
+
+    const diffX = startX.value - currentX.value;
+    const threshold = 50; // Distância mínima para considerar como arrastar
+
+    if (Math.abs(diffX) > threshold) {
+      if (diffX > 0) {
+        nextSlide();
+      } else {
+        previousSlide();
+      }
+    }
+
+    isDragging.value = false;
+    resumeCarousel();
+  };
+
+  // Funções para touch (mobile)
+  const startTouch = (e: TouchEvent) => {
+    isTouching.value = true;
+    startTouchX.value = e.touches[0].clientX;
+    currentTouchX.value = e.touches[0].clientX;
+    pauseCarousel();
+  };
+
+  const onTouch = (e: TouchEvent) => {
+    if (!isTouching.value) return;
+    e.preventDefault();
+    currentTouchX.value = e.touches[0].clientX;
+  };
+
+  const endTouch = () => {
+    if (!isTouching.value) return;
+
+    const diffX = startTouchX.value - currentTouchX.value;
+    const threshold = 50; // Distância mínima para considerar como arrastar
+
+    if (Math.abs(diffX) > threshold) {
+      if (diffX > 0) {
+        nextSlide();
+      } else {
+        previousSlide();
+      }
+    }
+
+    isTouching.value = false;
+    resumeCarousel();
   };
 
   const startCarousel = () => {
